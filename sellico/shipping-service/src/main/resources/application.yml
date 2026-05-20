@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: shipping-service
+  config:
+    import: "optional:configserver:http://config-server:8888"
+  cloud:
+    config:
+      uri: http://config-server:8888
+      fail-fast: false
+
+server:
+  port: 8092
+
+app:
+  ghn:
+    token: ${GHN_TOKEN:aef02875-bac5-11f0-bdfd-7a69b8ccea68} # Token mặc định cho môi trường test (nếu có)
+    shop-id: ${GHN_SHOP_ID:197974}
+    base-url: https://dev-online-gateway.ghn.vn/shiip/public-api
+
+logging:
+  level:
+    com.example.shippingservice.client: DEBUG

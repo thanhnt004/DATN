@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import: "optional:configserver:http://config-server:8888"
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS:kafka:9092}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/order_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://discovery-service:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    com.example.orderservice: DEBUG
+    org.springframework.kafka: INFO
+    org.apache.kafka: WARN
+
+# Feign client configuration
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+
+# Order service configuration
+order:
+  saga:
+    timeout-minutes: 30
+  outbox:
+    polling-interval-ms: 5000
+    batch-size: 100
+    max-retries: 5
+

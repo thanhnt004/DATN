@@ -1,0 +1,2 @@
+configuration.CommonSecurityConfig
+configuration.JwtAuthConverter

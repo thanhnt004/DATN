@@ -1,0 +1,31 @@
+package com.example.orderservice.domain.event;
+
+import lombok.Builder;
+import lombok.Getter;
+
+import java.util.UUID;
+
+/**
+ * Event published when an order is delivered.
+ */
+@Getter
+public class OrderDeliveredEvent extends DomainEvent {
+    private final UUID orderId;
+    private final String orderNumber;
+    private final UUID userId;
+    private final UUID sellerId;
+
+    @Builder
+    public OrderDeliveredEvent(UUID orderId, String orderNumber, UUID userId, UUID sellerId) {
+        super();
+        this.orderId = orderId;
+        this.orderNumber = orderNumber;
+        this.userId = userId;
+        this.sellerId = sellerId;
+    }
+
+    @Override
+    public UUID getAggregateId() {
+        return orderId;
+    }
+}
